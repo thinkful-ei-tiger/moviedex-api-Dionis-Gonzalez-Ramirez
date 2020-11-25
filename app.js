@@ -18,7 +18,7 @@ function validation(req, res, next) {
   if (auth && auth.split(' ')[1] === validAuth) {
     return next();
   }
-  return res.status(400).json('Unauthorized access!')
+  return res.status(400).json({error: 'Unauthorized access!'})
 }
 
 function getMovies(req, res) {
