@@ -28,13 +28,17 @@ function getMovies(req, res) {
   let { genre, country, avg_vote } = lowerQueries;
 
   if (genre) {
-    genre = genre.slice(0,1).toUpperCase() + genre.slice(1).toLowerCase();
+    genre = genre.split(' ').map(word => {
+      return word.slice(0,1).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
     movies = movies.filter(movie => movie.genre === genre);
     if (movies.length === 0) return res.status(204).json({error: `No movies with that genre!`})
   }
 
   if (country) {
-    country = country.slice(0,1).toUpperCase() + country.slice(1).toLowerCase();
+    country = country.split(' ').map(word => {
+      return word.slice(0,1).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
     movies = movies.filter(movie => movie.country === country);
     if (movies.length === 0) return res.status(204).json({error: `No movies from that country!`})
   }
